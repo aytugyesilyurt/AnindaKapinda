@@ -1,0 +1,35 @@
+﻿@model User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+    <link rel="stylesheet" href="~/css/Login.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <form asp-action="Register" class="box">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <h1>Kayıt Ol</h1>
+                            <input asp-for="FirstName" type="text" class="form-control" placeholder="Adınız" />
+                            <input asp-for="LastName" type="text" placeholder="Soyadınız">
+                            <input asp-for="Mail" type="text" placeholder="Mail adresiniz">
+                            <input asp-for="Password" type="text" placeholder="Şifreniz">
+                            <input type="password" placeholder="Şifrenizi tekrar giriniz">
+                            <input type="submit" value="Kayıt ol">
+                            <a class="forgot text-muted" href="/Account/Login">Giriş yap</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

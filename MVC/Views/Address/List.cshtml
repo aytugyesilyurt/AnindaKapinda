@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Entities.Concrete.Address>
+
+@{
+    ViewData["Title"] = "Adreslerim";
+}
+
+<h1>Adreslerim</h1>
+<p>
+    <a class="btn btn-success" asp-action="Create">Yeni adres oluştur</a>
+</p>
+<div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item"><a asp-controller="Profile" asp-action="Profile" asp-route-id="">Profil</a></li>
+            <li class="list-group-item"><a asp-action="MyAdresses" asp-route-id="">Adreslerim</a></li>
+            <li class="list-group-item"><a asp-controller="CreditCard" asp-action="List" asp-route-id="">Kayıtlı Kartlarım</a></li>
+            <li class="list-group-item"><a asp-controller="Order" asp-action="List" asp-route-id="">Geçmiş Siparişlerim</a></li>
+        </ul>
+    </div>
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CityId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CountyId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Directions)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CityId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CountyId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Directions   )
+                        </td>
+                        <td>
+                            <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.AddressId">Düzenle</a> |
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.AddressId">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

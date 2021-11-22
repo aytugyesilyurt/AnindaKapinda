@@ -1,0 +1,60 @@
+﻿@model Entities.Concrete.User
+
+@{
+    ViewData["Title"] = "Profile";
+
+}
+
+<h1>Üyelik bilgileriniz</h1>
+<p>
+    <a class="btn transparent">Hidden</a>
+</p>
+
+<div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item"><a asp-action="Profile" asp-route-id="">Profil</a></li>
+            <li class="list-group-item"><a asp-controller="Address" asp-action="List" asp-route-id="@Model.UserId">Adreslerim</a></li>
+            <li class="list-group-item"><a asp-controller="CreditCard" asp-action="List" asp-route-id="@Model.UserId">Kayıtlı Kartlarım</a></li>
+            <li class="list-group-item"><a asp-controller="Order" asp-action="List" asp-route-id="@Model.UserId">Geçmiş siparişlerim</a></li>
+        </ul>
+    </div>
+    <div class="col-md-8">
+        <div>
+            <dl class="row">
+                <hr />
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+                <hr />
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+                <hr />
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Mail)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Mail)
+                </dd>
+                <hr />
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Password)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Password)
+                </dd>
+                <hr />
+            </dl>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="ProfileEdit" asp-route-id="@Model.UserId">Bilgileri düzenle</a> |
+</div>

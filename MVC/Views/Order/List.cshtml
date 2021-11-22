@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Entities.Concrete.Order>
+
+@{
+    ViewData["Title"] = "Geçmiş Siparişlerim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Geçmiş Siparişlerim</h1>
+
+<p>
+    <a class="btn transparent">Hidden</a>
+</p>
+<div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item"><a asp-controller="Profile" asp-action="Profile" asp-route-id="">Profil</a></li>
+            <li class="list-group-item"><a asp-action="MyAdresses" asp-route-id="">Adreslerim</a></li>
+            <li class="list-group-item"><a asp-controller="CreditCard" asp-action="List" asp-route-id="">Kayıtlı Kartlarım</a></li>
+            <li class="list-group-item"><a asp-controller="Order" asp-action="List" asp-route-id="">Geçmiş Siparişlerim</a></li>
+        </ul>
+    </div>
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryAdress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliverDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryAdress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliverDate)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.OrderId">İncele</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

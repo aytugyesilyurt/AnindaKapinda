@@ -1,0 +1,98 @@
+﻿@model MVC.Models.ViewModels.ProductListViewModel
+
+@{
+    ViewData["Title"] = "Ürünler";
+}
+
+<h1>Ürün sayfası</h1>
+
+<p>
+    <a class="btn btn-primary" asp-controller="Product" asp-action="Create">Yeni Ürün</a>
+</p>
+
+<div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            @foreach (var item in Model.Categories)
+            {
+                <li class="list-group-item"><a asp-action="Index" asp-route-id="@item.CategoryId">@item.Name</a></li>
+            }
+            <li class="list-group-item"><a asp-action="Index" asp-route-id="">Tümü</a></li>
+        </ul>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        İsim
+                    </th>
+                    <th>
+                        Açıklama
+                    </th>
+                    <th>
+                        Fiyat
+                    </th>
+                    <th>
+                        İndirimli Fiyat
+                    </th>
+                    <th>Picture</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiscountedPrice)
+                        </td>
+                        <td>
+                            <img src="/images/products/@(item.ProductId).jpg" alt="@item.Name" onerror="this.src = '/images/products/image-preparing.png';" width="100" />
+                        </td>
+                        <td>
+                            <button id="Submit" value="@item.ProductId"> Sepete Ekle </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/jquery/jquery.js"></script>
+<script type="text/javascript">
+
+    $('#Submit').click(function () {
+        var id = document.getElementById('Submit').value;
+        $.ajax({
+            url: "@(Url.Action("Add", "Basket"))",
+            type: "POST",
+            data: { productId: id },
+            cache: false,
+            async: true,
+            success: function (data) {
+                alert("Ürün sepete eklendi");
+                var existingPrice = document.getElementById('cartTotalPrice').innerText;
+                existingPrice = parseFloat(existingPrice.replace(',', '.').substring(3, existingPrice.length));
+                console.log(existingPrice);
+                if (isNaN(existingPrice)) {
+                    document.getElementById('cartTotalPrice').innerText = "🛒 " + data.price;
+                }
+                else {
+                    document.getElementById('cartTotalPrice').innerText = "🛒 " + (existingPrice + data.price);
+                }
+            }
+        });
+    });
+
+</script>
